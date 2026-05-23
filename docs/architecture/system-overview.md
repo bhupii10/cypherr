@@ -1,33 +1,50 @@
-# Cypher System Overview
+# Cypher Process Map
 
-## Core Philosophy
+## Electron Main Process
 
-- local-first
-- modular
-- deterministic
-- scalable
-- offline-capable
-
----
-
-## Current Stack
-
-- Electron
-- Python backend
-- Faster Whisper large-v3
-- CUDA acceleration
+Responsibilities:
+- application lifecycle
+- window creation
 - IPC bridge
-- backend event streaming
-- modular tool runtime
-- push-to-talk execution loop
+- backend process spawning
+
+Dependencies:
+- renderer process
+- python backend
+
+Failure Impact:
+- full application failure
 
 ---
 
-## Current Goals
+## Renderer Process
 
-- stabilize architecture
-- identify unsafe abstractions
-- enforce clean subsystem boundaries
-- prepare for scalable Phase 2 development
-- preserve existing functionality
-- prevent architectural entropy
+Responsibilities:
+- holographic UI rendering
+- animations
+- user interaction
+- stream visualization
+
+Dependencies:
+- IPC events
+
+Failure Impact:
+- UI unusable
+- backend may still run
+
+---
+
+## Python Backend Process
+
+Responsibilities:
+- orchestration
+- STT execution
+- tool execution
+- backend streaming
+
+Dependencies:
+- Faster Whisper
+- CUDA runtime
+
+Failure Impact:
+- assistant execution unavailable
